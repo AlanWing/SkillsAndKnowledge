@@ -116,15 +116,31 @@ DataFrame接受的构建参数
 由列表或元组组成的列表 另一个DataFrame、NumPy的MaskedArray
 ~~~
 
+### 行和列
+
+~~~python
+frame.shape[1]    #计算列数
+frame.shape[0]    #计算行数
+len(frame)        #计算行数
+
+取某一行的值
+切片
+df.ix["state"]
+df.loc[index]
+
+取某一列的值  df.columnindex  df[columnindex]
+
+取某一行某一列  df.loc[index,columnindex]
+~~~
+
+
+
 ### DataFrame的赋值取值
 
 ~~~python
 取列转成一个Series
 通过类似字典取键的方式 df["state"]  ---> 得到一个 Series
 通过直接调用属性的方式 df.state     ---> 得到一个 Series
-
-取某一行的值
-df.ix["state"]
 
 新增列或修改当前列并赋值
 df["debt"]=16.5  -->全部赋值为16.5
@@ -289,6 +305,16 @@ frame.index.is_unique  --->True or False
 
 ## 汇总和计算描述统计
 
+### 按照条件分组
+
+```python
+关键字：groupby()
+
+
+```
+
+
+
 ~~~python
 一般是对整个表格进行操作
 df.sum() 会统计当前数据表内的数据总和 按列或按列计算（默认axis=0） NA值自动排除
@@ -318,4 +344,129 @@ Series的corr方法用于计算两个Series中非重叠的 非NA的 按索引对
 
 DataFrame的corr和cov方法以DataFrame的形式返回完整的相关系数或协方差矩阵
 ~~~
+
+### 唯一值、计数、成员资格 
+
+~~~python
+唯一值s.unique
+对于一个含有重复元素的Series unique函数返回唯一值数列
+
+计数pd.value_counts(obj,sort=False)
+返回一个数列 其中记录了每个元素存在的次数 (只能检测一维数据)
+而DataFrame希望实现计数功能时 使用data.apply(pd.value_counts)
+
+成员isin obj.isin(["a","b"])
+返回一个数列 其中存在于给定数列的返回True 不存在返回False
+~~~
+
+### 处理缺失数据
+
+~~~python
+dropna 通过阀值调节对缺失值的容忍度
+fillna 指定值或前插入后插入填充数据
+isnull 布尔显示数据是否缺失
+
+df.dropna() #过滤掉所有存在na的行 
+df.dropna(how="all") #只丢弃全部为na的行
+对于列操作，加入axis参数即可
+
+
+df.fillna(method="") 支持向前填充
+参数：method：插值方式 axis：待填充轴 inplace：是否生成副本 limit：可连续填充的最大数量
+~~~
+
+### 层次化索引
+
+~~~python
+Series的层次化索引 给两层索引
+data=Series(np.random.randn(10),index=[['a','a','a','b','b','b','c','c','d','d'],[1,2,3,1,2,3,1,2,2,3]])
+DataFrame的层次化索引 行和列都可以有多层索引 在构造时的参数 index和columns都为二维数组
+
+也可以单独创建一个MultiIndex然后可以选择多次复用
+列：MultiIndex.from_arrays([l1,l2],names=[a,b])
+~~~
+
+### 重排分级顺序
+
+~~~python
+df.swaplevel("key1","key2") 互换索引列 数据不发生变化
+df.sortlevel(1)  根据所指定的索引列 对索引指定的数据进行排序
+~~~
+
+### 根据级别汇总统计
+
+~~~python
+在上述的汇总统计函数中加入参数level="" 则可以按分级去计算总和
+df.sum(level="index") 按行索引的分级计算总和
+df.sum(level="column" axis=1)按列索引的分级计算总和
+~~~
+
+### 行索引与列索引转换
+
+~~~python
+df.set_index() 将一个或多个列转换成行索引
+df.set_index(drop=False) 将一个或多个列转换成行索引 原有的数据会被保存
+
+df.reset_index()将层次化级别的行索引转为列索引
+~~~
+
+## 数据加载、存储与文件读取
+
+### 读写文本格式数据
+
+#### 普通读取
+
+~~~python
+read_csv  从文件、URL、文件型对象加载带分隔符的数据  默认分隔符为逗号
+read_table  从文件、URL、文件型对象加载带分隔符的数据 默认分隔符为\t
+
+对于没有header的数据 可分配默认列名 也可自定义列名
+pd.read_csv("",header=None)
+pd.read_csv("",names=[])  自定义column列名
+pd.read_csv("",names=[],index_col="") 将数据中的某一列作为行索引
+pd.read_csv("",names=[],index_col=["",""]) 将数据中的某两列作为层次化行索引
+
+pd.read_table("",sep="\s+") 利用正则 去除数据间的数量不定的空白符
+pd.read_csv("",skiprow=[0,2,3]) 跳过某些行
+
+处理缺失字符：
+pd.read_csv("",na_values=["NULL"])
+为不同列的缺失字符指定NA标记值
+pd.read_csv("",na_values={"message":["foo","NA"],"something":["two"]})
+
+常用参数：
+path
+sep/delimiter
+header
+index_col
+names
+skiprows
+na_values
+nrows
+chunksize
+~~~
+
+#### 逐块读取
+
+~~~python
+指定行数：
+read_csv("",nrows=)
+逐块获取迭代对象
+chunker=pd.read_csv("",chunksize=1000) #返回一个可迭代对象 1000行数据 后续通过循环添加到字典或列表
+~~~
+
+### 将数据输出到文本格式
+
+~~~python
+data.to_csv("")
+data.to_csv(sys.stdout,sep="|")
+parameters: 
+    sep="|" 分隔符
+    na_rep="NULL" 空值填充
+    index=False 去除行索引
+    header=False 去除列索引
+    cols=["a","b","c"] 只写出一部分 并按照指定顺序排列
+~~~
+
+
 

@@ -113,9 +113,13 @@ mysql的配置文件要默认端口号：
 
 11. 远程仓库名称修改 git remote rename origin <新名字>
 
+12. 修改提交日志	 git commit --amend 
+
+13. merge多次提交为一次 
+    git rebase -i HEAD~2   意思是合并之前的两次提交
 git remote -v 检查remote内容
 git remote rm origin 删除remote内容
-git commit --amend 修改注释	
+
 
 
 git log 查看本地提交历史
@@ -322,7 +326,7 @@ ssh root@IP
 输入密码
 ~~~
 
-**OTC新控服务器SSH**
+**OTC新控服务器SSH**(生产环境)
 
 ~~~markdown
 新控OTC
@@ -331,7 +335,7 @@ root/Ruida@otc321
 rss/xinkongotc@200506
 ~~~
 
-**OTC茂源服务器SSH**
+**OTC茂源服务器SSH**（14环境）
 
 ~~~markdown
 茂源OTC
@@ -340,3 +344,42 @@ rss
 123456
 ~~~
 
+**基金子平台服务器**（14环境）
+
+~~~markdown
+IP：192.168.1.14:9901
+gss
+123456
+
+supervisor:rss/rsstest
+~~~
+
+**基金子平台服务器（生产环境）**
+
+```markdown
+IP:121.46.13.124
+rss
+fools_day_124@0401
+
+supervisor:
+    配置文件路径： /etc/supervisor/fund.conf
+    fund_server web后端进程
+    fund_apscheduler 定时任务进程
+    fund_celery_worker celery_worker进程
+版本发布：
+14环境切换到master，执行 python3 /home/gss/fund_management_pro/rsync/rsync_.py  输入密码fools_day_124@0401
+```
+
+
+
+**OTC茂源服务器（生产环境）**
+
+```markdown
+IP:47.106.135.71   
+rss/foolsday#0401
+root/FoolsDay@0401
+```
+
+
+
+https://zb.citicsf.com/otcoption/SilverSoftFramework/SilverSoft.Robot.ashx
