@@ -67,14 +67,24 @@ obj3.name= "hello"
 给一个Series对象的索引列赋name属性值
 obj3.index.name="State"
 修改Series对象的索引列值
-obj3.index=[]
+obj3.index=[]	
 ~~~
-
-
 
 ## DataFrame-表格型数据结构
 
+## 行和列全部显示
 
+~~~python
+​~~~python
+全部显示
+#显示所有列
+pd.set_option('display.max_columns', None)
+#显示所有行
+pd.set_option('display.max_rows', None)
+#设置value的显示长度为100，默认为50
+pd.set_option('max_colwidth',100)
+​~~~
+~~~
 
 ### Dataframe的构建
 

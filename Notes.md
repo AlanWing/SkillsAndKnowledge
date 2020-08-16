@@ -40,6 +40,7 @@ mysql的配置文件要默认端口号：
 	firewall-cmd --add-port=6379/tcp --permanent
 2.redis配置文件中bind127.0.0.1注释掉
 3.protected-mode关闭
+4.注释掉 bind 127.0.0.1
 
 配置文件为/etc/redis/redis.conf(在线安装推荐)或者 /usr/local/redis/redis.conf(手动安装)
 ~~~
