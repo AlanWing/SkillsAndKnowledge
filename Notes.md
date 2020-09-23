@@ -327,7 +327,7 @@ ssh root@IP
 输入密码
 ~~~
 
-**OTC新控服务器SSH**(生产环境)
+**OTC新控服务器**(生产环境)
 
 ~~~markdown
 新控OTC
@@ -336,7 +336,17 @@ root/Ruida@otc321
 rss/xinkongotc@200506
 ~~~
 
-**OTC茂源服务器SSH**（14环境）
+**OTC新控(测试)**
+
+~~~markdown
+192.168.5.101
+alyssa/123456
+root/123456
+~~~
+
+
+
+**OTC茂源服务器**（14环境）
 
 ~~~markdown
 茂源OTC
@@ -360,7 +370,7 @@ supervisor:rss/rsstest
 ```markdown
 IP:121.46.13.124
 rss
-fools_day_124@0401
+double_nine#124@0909
 
 supervisor:
     配置文件路径： /etc/supervisor/fund.conf
@@ -368,10 +378,8 @@ supervisor:
     fund_apscheduler 定时任务进程
     fund_celery_worker celery_worker进程
 版本发布：
-14环境切换到master，执行 python3 /home/gss/fund_management_pro/rsync/rsync_.py  输入密码fools_day_124@0401
+14环境切换到master，执行 python3 /home/gss/fund_management_pro/rsync/rsync_.py  输入密码double_nine#124@0909
 ```
-
-
 
 **OTC茂源服务器（生产环境）**
 

@@ -51,6 +51,8 @@ obj3=Series({"a":1,"b":2,"c":3}，index=["b","c","d"])
 pandas和Series都有检测数据表是否存在数据缺失的情况
 pd.isnull(obj3)   ---> True True False
 obj3.isnull       ---> True True False
+
+DataFrame计算时将特殊字段全部转换成Nan 这样计算时会自动被忽略 之后再用fillna()
 ~~~
 
 ### Series进行计算时的自动索引对应
@@ -75,7 +77,6 @@ obj3.index=[]
 ## 行和列全部显示
 
 ~~~python
-​~~~python
 全部显示
 #显示所有列
 pd.set_option('display.max_columns', None)
@@ -141,6 +142,9 @@ df.loc[index]
 取某一列的值  df.columnindex  df[columnindex]
 
 取某一行某一列  df.loc[index,columnindex]
+获取第一列     first_column = df.iloc[:, 0]
+
+添加新的一行de.append(ignore_index=True)
 ~~~
 
 
@@ -249,6 +253,12 @@ DataFrame:
     过滤：df[df["three"]>5] 取列名为three并且值大于5的数据
     	 
          df[df>5]=0  将大于5的数据全部赋值为0  
+         # 筛选第一列中含有"科目代码"的行
+         df.iloc[:,0].str.contains("科目代码")
+         # 筛选第一列中含有"科目代码"的行 或者以数字开头的行
+         df = df[(df.iloc[:,0].str.contains("科目代码|\d"))]
+         # 注:contain在含有Nan的列无法使用,因此要加 nv=False
+         df.columns = list(df[df.iloc[:, 0].str.contains("科目代码", na=False)]
 ~~~
 
 ## 算术运算
@@ -478,5 +488,7 @@ parameters:
     cols=["a","b","c"] 只写出一部分 并按照指定顺序排列
 ~~~
 
-
+## round and fillna
+在保留小数以及填充nan时候 要确保数据类型为float或int  
+DataFrame.astype(float)
 
