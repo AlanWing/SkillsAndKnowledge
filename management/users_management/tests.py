@@ -37,16 +37,20 @@ users = UserInfo.objects.all()
 #     "code":0,
 #     "data":[]
 # }
-users = UserInfo.objects.filter(city="太原市", village="小店区")
-users_dic = {}
-for u in users:
-    users_dic.setdefault(u.id,
-                         {"name": u.name, "sex": u.sex, "age": u.age, "height": u.height, "weight": u.weight,
-                          "address": u.address, "id_number": u.id_number, "tel": u.tel, "edu": u.edu_background,
-                          "is_ins": "是" if u.is_instructor else "否", "class": u.instructor_class, "city": u.city,
-                          "type": u.instructor_type, "ver_status": u.ver_status, "province": u.province,
-                          "village": u.village, "certi_num": u.certificate_num, "certi_date": u.certificate_date,
-                          "gym": u.gym, "assessment": u.assessment, "upload_time": u.upload_time,
-                          "annual_survey_date": str(u.annual_survey_date)})
-print(users_dic)
+# users = UserInfo.objects.filter(city="太原市", village="小店区")
+# users_dic = {}
+# for u in users:
+#     users_dic.setdefault(u.id,
+#                          {"name": u.name, "sex": u.sex, "age": u.age, "height": u.height, "weight": u.weight,
+#                           "address": u.address, "id_number": u.id_number, "tel": u.tel, "edu": u.edu_background,
+#                           "is_ins": "是" if u.is_instructor else "否", "class": u.instructor_class, "city": u.city,
+#                           "type": u.instructor_type, "ver_status": u.ver_status, "province": u.province,
+#                           "village": u.village, "certi_num": u.certificate_num, "certi_date": u.certificate_date,
+#                           "gym": u.gym, "assessment": u.assessment, "upload_time": u.upload_time,
+#                           "annual_survey_date": str(u.annual_survey_date)})
+# print(users_dic)
+user = UserInfo.objects.get(id=1)
+user.annual_survey_date = "2020-09-08"
+user.save()
+
 

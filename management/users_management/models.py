@@ -29,7 +29,7 @@ class UserInfo(Model):
     id_number = CharField(max_length=30, verbose_name="身份证号", null=True)
     tel = CharField(max_length=20, verbose_name="电话号码", null=True)
     edu_background = CharField(max_length=20, verbose_name="文化程度", null=True)
-    is_instructor = BooleanField(verbose_name="是否指导员", null=True)
+    is_instructor = BooleanField(verbose_name="是否指导员", null=False)
     instructor_class = CharField(max_length=20, verbose_name="指导员等级", null=True)
     instructor_type = CharField(max_length=40, verbose_name="指导类型", null=True)
     ver_status = CharField(max_length=20, verbose_name="审核状态", null=True)
@@ -42,6 +42,7 @@ class UserInfo(Model):
     assessment = CharField(max_length=30, verbose_name="评定成绩", null=True)
     upload_time = CharField(max_length=30, verbose_name="上传日期", null=True)
     annual_survey_date = DateField(max_length=30, verbose_name="年检日期", null=True)
+    is_active = BooleanField(null=False)
 
     class Meta:
         db_table = "userinfo"
@@ -49,7 +50,7 @@ class UserInfo(Model):
 
 class Moment(Model):
     id = AutoField(primary_key=True, verbose_name="ID")
-    user_id = ForeignKey(UserInfo, on_delete=CASCADE, verbose_name="用户ID")
+    user = ForeignKey(UserInfo, on_delete=CASCADE, verbose_name="用户ID")
     content = CharField(max_length=128, verbose_name="发布内容", null=True)
     post_time = CharField(max_length=30, verbose_name="发布时间", null=True)
     picture_path = CharField(max_length=128, verbose_name="图片路径", null=True)
@@ -108,4 +109,5 @@ class FeedBack(Model):
 
     class Meta:
         db_table = "feedback"
+
 
