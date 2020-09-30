@@ -23,4 +23,6 @@ Car.show_wheels()
 The result is 5.
 ```
 
-+ 
++ os.mkdir() and os.makedirs()
+os.mkdir(): If you give a long path, any segment of the path should be created before the last one.
+os.makedirs(): Recursive.
