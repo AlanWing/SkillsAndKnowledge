@@ -73,10 +73,10 @@ def group_by_district(request):
     username = request.user.username
     access = Access.objects.get(account=username).access
     if access == "省级":
-        data = list(UserInfo.objects.values("city").annotate(count=Count("id")))
+        data = list(UserInfo.objects.values("city").filter(city__isnull=False).annotate(count=Count("id")))
     elif access == "市级":
         city = Access.objects.get(account=username).city
-        data = list(UserInfo.objects.values("district").filter(city=city).annotate(count=Count("id")))
+        data = list(Access.objects.values("district").filter(city=city,district__isnull=False).annotate(count=Count("id")))
     else:
         return JsonResponse({"code": 0, "data": "当前权限无法显示"})
     return JsonResponse({"code": 0, "data": data})
@@ -206,7 +206,7 @@ def regions(request):
     elif access.access == "市级":
         city = access.city
         districts = [i["district"] for i in
-                     Access.objects.values("district").filter(city=city).annotate(count=Count("id"))]
+                     Access.objects.values("district").filter(city=city,district__isnull=False).annotate(count=Count("id"))]
         res["data"][city] = districts
     else:
         city = access.city
