@@ -209,7 +209,7 @@ def regions(request):
     else:
         city = access.city
         district = access.district
-        res["data"][city] = district
+        res["data"][city] = [district,]
     return JsonResponse(res)
 
 
