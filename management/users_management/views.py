@@ -1,5 +1,3 @@
-import datetime
-import json
 import time
 
 from django.db.models import Count, Q
@@ -76,7 +74,7 @@ def group_by_district(request):
         data = list(UserInfo.objects.values("city").filter(city__isnull=False).annotate(count=Count("id")))
     elif access == "市级":
         city = Access.objects.get(account=username).city
-        data = list(Access.objects.values("district").filter(city=city,district__isnull=False).annotate(count=Count("id")))
+        data = list(UserInfo.objects.values("village").filter(city=city,village__isnull=False).annotate(count=Count("id")))
     else:
         return JsonResponse({"code": 0, "data": "当前权限无法显示"})
     return JsonResponse({"code": 0, "data": data})
