@@ -1,12 +1,11 @@
 import time
 
-from django.db.models import Count, Q
+from django.db.models import Count
 from django.http import JsonResponse, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from users_management.models import UserInfo, Access, Moment, FeedBack
 from django.core.paginator import Paginator
-import pandas as pd
 
 
 # 登录
@@ -30,7 +29,7 @@ def auth_logout(request):
         "data": "登出成功"
     })
 
-
+# 用户注册
 def auth_register(request):
     username = request.GET.get("username")
     password = request.GET.get("password")
@@ -74,7 +73,8 @@ def group_by_district(request):
         data = list(UserInfo.objects.values("city").filter(city__isnull=False).annotate(count=Count("id")))
     elif access == "市级":
         city = Access.objects.get(account=username).city
-        data = list(UserInfo.objects.values("village").filter(city=city,village__isnull=False).annotate(count=Count("id")))
+        data = UserInfo.objects.values("village").filter(city=city,village__isnull=False).annotate(count=Count("id"))
+        data = [{"city":i["village"],"count":i["count"]} for i in data]
     else:
         return JsonResponse({"code": 0, "data": "当前权限无法显示"})
     return JsonResponse({"code": 0, "data": data})
@@ -188,6 +188,7 @@ def group_by_age(request):
 #     if access == "省级":
 #         # users = UserInfo.objects.all().order_by("province")
 #         pass
+
 # 获取市区
 def regions(request):
     username = request.user.username
@@ -230,7 +231,7 @@ def users(request):
         else:
             users = UserInfo.objects.filter(village=access.district, is_active=True)
     if not users:
-        return JsonResponse({"code": 0, "data": "当前无用户"})
+        return JsonResponse({"code": 0, "data": []})
     users_list = []
     for u in users:
         users_list.append(
