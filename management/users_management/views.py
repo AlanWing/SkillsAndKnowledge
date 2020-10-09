@@ -237,8 +237,8 @@ def users(request):
         users_list.append(
             {"id": u.id, "name": u.name, "sex": u.sex, "age": u.age, "height": u.height, "weight": u.weight,
              "address": u.address, "id_number": u.id_number, "tel": u.tel, "edu": u.edu_background,
-             "is_ins": "是" if u.is_instructor else "否", "class": u.instructor_class, "village": u.village,
-             "city": u.city, "type": u.instructor_type, "ver_status": u.ver_status, "province": u.province,
+             "is_ins": "是" if u.is_instructor else "否", "instructor_class": u.instructor_class, "village": u.village,
+             "city": u.city, "instructor_type": u.instructor_type, "ver_status": u.ver_status, "province": u.province,
              "certi_num": u.certificate_num, "certi_date": u.certificate_date, "gym": u.gym,
              "assessment": u.assessment, "upload_time": u.upload_time,
              "annual_survey_date": str(u.annual_survey_date)})
@@ -260,8 +260,8 @@ def users_update(request):
         tel = request.GET.get("tel", "")
         edu = request.GET.get("edu", "")
         is_ins = request.GET.get("is_ins", "")
-        ins_class = request.GET.get("class", "")
-        type = request.GET.get("type", "")
+        instructor_class = request.GET.get("instructor_class", "")
+        instructor_type = request.GET.get("instructor_type", "")
         ver_status = request.GET.get("ver_status", "")
         certi_num = request.GET.get("certi_num", "")
         certi_date = request.GET.get("certi_date", "")
@@ -280,8 +280,8 @@ def users_update(request):
         user.tel = tel
         user.edu_background = edu
         user.is_instructor = True if is_ins == "true" else False
-        user.instructor_class = ins_class
-        user.instructor_type = type
+        user.instructor_class = instructor_class
+        user.instructor_type = instructor_type
         user.ver_status = ver_status
         user.certificate_num = certi_num
         user.certificate_date = certi_date
