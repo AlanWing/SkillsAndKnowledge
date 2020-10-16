@@ -492,3 +492,8 @@ parameters:
 在保留小数以及填充nan时候 要确保数据类型为float或int  
 DataFrame.astype(float)
 
+## filter contains
+```
+ali = ["a","b","c"]
+df = df[df["name"].str.contains("|".join(ali),na =False)]
+```
