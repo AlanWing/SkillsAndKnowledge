@@ -84,7 +84,8 @@ pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
 #设置value的显示长度为100，默认为50
 pd.set_option('max_colwidth',100)
-​~~~
+​# 也可用上下文管理器
+with option_context('display.max_rows', 10, 'display.max_columns', 5):
 ~~~
 
 ### Dataframe的构建

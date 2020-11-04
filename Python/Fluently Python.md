@@ -31,7 +31,7 @@ os.makedirs(): Recursive.
 + Concurrency(并发)  
 Concurrency are used in those programs which have many I/O waitings. Frameworks can deal with other requests during the waitings of previous' requests.
 
-+ Parallelism(并行)
++ Parallelism(并行)    
 Parallelism refers to process one by one, with several processors. In contrast, the main program has to wait during processing with current request.
 
 # *args and **kwargs
@@ -60,4 +60,18 @@ def main(**kwargs):
 if __name__ == "__main__":
     main(a=1)
     # {"a":1}
+```
+
+
+# functools.partial
+It returns a new function object with partial arguments in it.
+```python
+from functool import partial
+def multiply(x,y):
+    return x*y
+
+partial_func = partial(multiply,5)
+pritial__func(y=6)    
+
+Output:30
 ```
