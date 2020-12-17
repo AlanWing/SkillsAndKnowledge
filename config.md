@@ -3,12 +3,13 @@
 ```python
 {
     "server":"104.243.27.161",
+    "server_port":9702,
     "mode":"tcp_and_udp",
-    "server_port":12345,
+    "local_address":"127.0.0.1",
     "local_port":1080,
     "password":"Long1997",
     "timeout":60,
-    "method":"aes-256-gcm"
+    "method":"chacha20-ieft-poly1305"
 }
 ```
 + **ssh** 

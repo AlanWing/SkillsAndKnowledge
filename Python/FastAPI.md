@@ -141,3 +141,18 @@ async def update_item(
         results.update({"q": q})
     return results
 ```
+
+
+
+
+
+
+
+# problems occured while using
+## Task was destroyed but it is pending!
+```python
+Task was destroyed but it is pending!
+
+task: <Task pending name='Task-4' coro=<RedisConnection._read_data() done, defined at /home/aurora/anaconda3/envs/mece2.0/lib/python3.9/site-packages/aioredis/connection.py:180> wait_for=<Future pending cb=[<TaskWakeupMethWrapper object at 0x7fce964e8be0>()]> cb=[RedisConnection.__init__.<locals>.<lambda>() at /home/aurora/anaconda3/envs/mece2.0/lib/python3.9/site-packages/aioredis/connection.py:168]>
+```
+beacuse it end the event loop with some connections not closed, this is generally not harmful.
