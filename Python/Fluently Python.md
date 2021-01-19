@@ -101,3 +101,28 @@ The ready state will indicate that a task has work to do and is ready to be run,
 An important point of asyncio is that the tasks never give up control without intentionally doing so. They never get interrupted in the middle of an operation. This allows us to share resources a bit more easily in asyncio than in threading. You don’t have to worry about making your code thread-safe.
 
 That’s a high-level view of what’s happening with asyncio. If you want more detail, this StackOverflow answer provides some good details if you want to dig deeper.
+
+
+# MixIn programming
+
++ description  
+```markdown
+Mixin is a kind of base class that should be inherited by sub classes, which will provide some extra methods for instances but don't create a instance. 
+```
++ The basic example is something like below
+```python
+    class MyMixin:
+
+        def setname(this, name):
+            this.name = name
+
+        def getname(this):
+            return this.name
+
+
+    class MyClass(MyMixin):
+        def __init__(self):
+            self.name = "Default"
+
+    my_object = MyClass()
+```

@@ -8,7 +8,7 @@
     Client initiates the handshake by sending a "hello" message to the server, the message will include which TLS version the client supports, the cipher suites supported and "client random".
 
 2. server "Hello"   
-    To reply the client's message, the server will send a message which will contain the server's certificate, the cipher suit the server chosen according to the client's supports and "server random".
+    To reply the client's message, the server will send a message which will contain the server's certificate and the public key, the cipher suit the server chosen according to the client's supports and "server random".
 
 3. Authentication   
     The client will verify the server's certificate.
