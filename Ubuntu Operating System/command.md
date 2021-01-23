@@ -8,3 +8,11 @@
 + 执行
 sudo ./ ***.bundle
 
+# Port status check
++ specific port
+```markdown 
+lsof -i:[port]
+```
+
++ 
+

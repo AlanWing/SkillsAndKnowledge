@@ -9,7 +9,7 @@
     "local_port":1080,
     "password":"Long1997",
     "timeout":60,
-    "method":"chacha20-ieft-poly1305"
+    "method":"aes-256-cfb"
 }
 ```
 + **ssh** 

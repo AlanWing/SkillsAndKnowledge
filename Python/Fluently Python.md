@@ -101,3 +101,49 @@ The ready state will indicate that a task has work to do and is ready to be run,
 An important point of asyncio is that the tasks never give up control without intentionally doing so. They never get interrupted in the middle of an operation. This allows us to share resources a bit more easily in asyncio than in threading. You don’t have to worry about making your code thread-safe.
 
 That’s a high-level view of what’s happening with asyncio. If you want more detail, this StackOverflow answer provides some good details if you want to dig deeper.
+
+
+# MixIn programming
+
++ description  
+```markdown
+Mixin is a kind of base class that should be inherited by sub classes, which will provide some extra methods for instances but don't create a instance. 
+```
++ The basic example is something like below
+```python
+    class MyMixin:
+
+        def setname(this, name):
+            this.name = name
+
+        def getname(this):
+            return this.name
+
+
+    class MyClass(MyMixin):
+        def __init__(self):
+            self.name = "Default"
+
+    my_object = MyClass()
+```
+
+# List
++ Dynamic Array   
+Usually when we initialize an array in python(class List), it has a certain length, if we add more elements into this array, it will be expanded dynamically.  
+And usually it obeys the steps below.
+```mardown
+1. Create a larger array.
+2. B[i] = A[i], which means array B has the same pointer as array A.
+3. Append the new elements in the new array.
+```
+Tips: Usually we expand 2 times length than before.
+
++ Amortization （摊销）  
+只有当数组涉及到扩容时，才会消耗时间创建新的数组，只向末尾增添元素时间复杂度为O（1） 
+为了做摊销分析 我们使用一种特殊的方法来证明
+<!-- Only when we expand the array we need time to create,while the time complexity of append method is O(1).   
+In order to calculate the time complexity of the dynamic changing. We use amortized analysis algorithem. -->
+```markdown
+Question: S是一个具有初始大小的动态数组 当数组已满时 将该数组扩大到2倍 
+Prove: 假定每次append需要支付一枚硬币,假定扩大数组(从k到2k) 需要支付k枚硬币 我们对每一次增添操作索要3枚硬币.因此 对不需要扩大数组的append操作我们多付了2枚硬币.
+```

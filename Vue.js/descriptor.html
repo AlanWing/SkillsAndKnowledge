@@ -1,0 +1,32 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app" @click="btnclick">
+    <button @click.stop="btnclick1">hehe</button>
+  </div>
+  <script src="./Vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data:{
+          name:"Kobe"
+      },
+      methods:{
+          btnclick(){
+              console.log("btnclick")
+          },
+          btnclick1(){
+              console.log("btnclick1")
+          }
+      }
+    })
+  </script>
+</body>
+
+</html>

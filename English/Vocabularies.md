@@ -21,3 +21,8 @@
 + populate 填充
 
 + invoke 调用
+
++ icon 图标
+
++ respectively 分别地
+  They are six years old and seven respectively
