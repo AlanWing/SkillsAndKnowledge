@@ -183,3 +183,102 @@ const app = new Vue({
 
 </script>
 ```
+
+
+## v-on description
+
+### basic usage
+```html
+<button v-on:click="btnclick"></button>
+```
+
+### @click.stop
+```markdown
+To prevent event bubbling.
+```
+```html
+<button @click.stop="btnclick"></button>
+```
+
+
+### prevent 
+To prevent auto-submit of form.
+```html
+<form action="">
+<button @click.prevent="submitclick"></button>
+</form>
+```
+
+### keyup
+```markdown
+To listen event when we lift our finger on the keyboard
+```
+```html
+<input type="text" @keyup.enter="keyup">
+```
+
+### click for one time 
+```markdown 
+Invoke the function only when the first time user click the button
+```
+```html
+<button @click.once="once"></button>
+```
+
+## v-if|v-else-if|v-else
+
+
+
+## v-show
+```
+Similar as v-if ,but v-show add a style="display:None"
+when the tag changes quickly and frequently, use v-show, use v-if when changes just once.
+```
+
+## v-for 
+```
+traverse
+```
+```html
+<ul>
+    <li v-for="item in names">{{item}}</li>
+    <!-- when traverse an object in javascript, we get the value every time --> 
+    <!-- when traverse a python dict object,we get the key   -->
+    <li v-for="(value,key,index) in names">{{value}}--{{key}}--{{idnex}}</li>
+    <!-- javascript object is ordered  -->
+</ul>
+```
+
+## js 响应式 与非响应式
++ 响应式
+```markdown
+1. array.push()
+2. array.pop()
+3. array.shift()
+4. array.unshift()
+5. array.splice()
+6. 
+```
++ 非响应式
+```markdown
+1. 通过数组改变值
+
+```
+## javascript splice()
++ remove elements
+```javascript
+array = [1,2,3,4]
+// splice(start_index,count(default:all))
+array.splice(1,2)
+```
++ update elements 
+```javascript
+array = [1,2,3,4]
+array.splice(1,3,"m","n","k")
+```
++ add elements
+```javascript
+array=[1,2,3,4]
+array.splice(1,0,"c","d")
+```
+
