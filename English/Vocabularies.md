@@ -26,3 +26,5 @@
 
 + respectively 分别地
   They are six years old and seven respectively
+
++ superficial 肤浅的
