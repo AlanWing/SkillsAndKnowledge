@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- object -->
+    <div id="app" :style="getStyle()">{{message}}</div>
+    <!-- array -->
+    <div id="app" :style=[backgroundColor,fontSize]>{{message}}</div>
+    <script src="./vue.js"></script>
+    <script>
+        const obj = {
+            list: ["Aquaman", "SpiderMan", "IronMan", "CaptainInAmerica"],
+            isActive: false,
+            mark: -1,
+            message: "hehe",
+            backgroundColor: {
+                backgroundColor: "red",
+                fontSize: "50px"
+            },
+
+        }
+        const app = new Vue({
+            el: "#app",
+            data: obj,
+            methods: {
+                getStyle: function () {
+                    return {
+                        backgroundColor: this.backgroundColor,
+                        fontSize: this.fontSize
+                    }
+
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

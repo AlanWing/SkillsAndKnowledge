@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>Document</title>
+    <style>
+        .active {
+            color: red
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li :class="{active:index==mark}" v-for="(item,index) in list" v-on:click="changeColor(index)">
+                {{index+ " " +item}}
+            </li>
+        </ul>
+        <!-- <h2 :class="{active:isActive}">{{text}}</h2>
+        <button v-on:click="bClick">按钮</button> -->
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        const obj = {
+            list: ["Aquaman", "SpiderMan", "IronMan", "CaptainInAmerica"],
+            isActive: false,
+            mark: -1
+        }
+        const app = new Vue({
+            el: "#app",
+            data: obj,
+            methods: {
+                changeColor: function (index) {
+                    if (index != this.mark) {
+                        this.mark = index
+                    } else {
+                        this.mark = -1
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
