@@ -282,3 +282,32 @@ array=[1,2,3,4]
 array.splice(1,0,"c","d")
 ```
 
+## v-model 
+```html
++ v-model + text
+<div>
+    <input type="text" v-model="message">{{message}}
+</div>
+```
+
++ v-model + radio
+```html
+<div>
+    <label><input type="radio" id ="male"  value="男" v-model="sex">男</label>
+    <label><input type="radio" id ="female" value="女" v-model="sex">女</label>
+    <!--  -->
+</div>
+<script>
+    const app = new Vue({
+        el : "#app",
+        data : {
+            sex: "男" <!--default-->
+        }
+    })
+</script>
+```
+
++ v-model + checkbox
+```html
+
+```
